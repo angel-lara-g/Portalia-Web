@@ -1,0 +1,528 @@
+/**
+ * style.css
+ * ---------
+ * Global stylesheet for the Portalia web application.
+ *
+ * Design system inspired by the Portalia UI prototype:
+ * - Background: light gray (#f0f2f5)
+ * - Cards: white with soft shadows
+ * - Accent colors: blue (#4361ee), green (#2ec4b6), purple (#7b2d8b)
+ * - Dark footer: (#1a1a2e)
+ * - Pill-shaped buttons with semantic colors
+ * - Project cards: image-fill with overlaid title
+ */
+
+/* ─── Google Fonts ───────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+/* ─── CSS Variables ──────────────────────────────────────────────────────── */
+:root {
+    --bg:           #f0f2f5;
+    --white:        #ffffff;
+    --card-shadow:  0 2px 16px rgba(0,0,0,0.08);
+    --card-radius:  16px;
+    --header-h:     68px;
+
+    /* Brand colors */
+    --blue:         #4361ee;
+    --blue-dark:    #3451d1;
+    --green:        #2ec4b6;
+    --green-dark:   #25a99d;
+    --purple:       #7b2d8b;
+    --purple-dark:  #641f72;
+    --red:          #e63946;
+    --red-dark:     #c1121f;
+    --orange:       #f4845f;
+    --orange-dark:  #e0613a;
+    --gray-text:    #6b7280;
+    --dark-text:    #111827;
+
+    /* Footer */
+    --footer-bg:    #1a1a2e;
+    --footer-text:  #9ca3af;
+    --footer-h:     auto;
+
+    /* Typography */
+    --font-body:    'Plus Jakarta Sans', sans-serif;
+    --font-display: 'Syne', sans-serif;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--dark-text);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--dark-text);
+}
+
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.1rem; }
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-h);
+    background-color: var(--white);
+    box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 1000;
+}
+
+.home img {
+    height: 38px;
+    width: auto;
+    display: block;
+}
+
+/* ─── Navigation Buttons ─────────────────────────────────────────────────── */
+.options {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.hor {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* Base pill button — applied via .sBtt */
+.sBtt {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.15s, transform 0.1s;
+    white-space: nowrap;
+    background-color: var(--white);
+    color: var(--dark-text);
+}
+
+.sBtt:hover  { filter: brightness(0.93); transform: translateY(-1px); }
+.sBtt:active { transform: translateY(0); }
+
+/* Semantic color variants */
+.blue   { background-color: var(--blue);   color: var(--white); border-color: var(--blue); }
+.green  { background-color: var(--green);  color: var(--white); border-color: var(--green); }
+.purple { background-color: var(--purple); color: var(--white); border-color: var(--purple); }
+.red    { background-color: var(--red);    color: var(--white); border-color: var(--red); }
+.orange { background-color: var(--orange); color: var(--white); border-color: var(--orange); }
+.ghost  { background-color: transparent;   color: var(--gray-text); border-color: #d1d5db; }
+
+.bold { font-weight: 700; }
+
+/* ─── Page Body / Father Container ──────────────────────────────────────── */
+.father {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: calc(var(--header-h) + 1.5rem) 1.5rem 2rem;
+}
+
+/* Full-width variant (no max-width cap) */
+.cont {
+    width: 100%;
+}
+.cont .father {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ─── Cards / Panels ─────────────────────────────────────────────────────── */
+.b {
+    background-color: var(--white);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Wide left panel (profile info, etc.) */
+.b4 {
+    width: 100%;
+}
+
+/* Centered upload/preview panel */
+.pU {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* ─── Form Inputs ────────────────────────────────────────────────────────── */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--dark-text);
+    background: var(--white);
+    transition: border-color 0.15s, box-shadow 0.15s;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(67,97,238,0.12);
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+/* ─── Auth Pages (login / register) ─────────────────────────────────────── */
+.start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #a8c0ff 0%, #c9a7d8 50%, #f3b8a0 100%);
+    padding: 2rem;
+}
+
+.sData {
+    background: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 440px;
+    text-align: left;
+}
+
+.sData h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.sData input[type="text"],
+.sData input[type="password"],
+.sData input[type="email"] {
+    margin-bottom: 1rem;
+}
+
+/* ─── Search Page ────────────────────────────────────────────────────────── */
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: calc(var(--header-h) + 2rem);
+    min-height: 100vh;
+}
+
+.sContent {
+    background: var(--white);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    width: 100%;
+    max-width: 860px;
+    text-align: center;
+}
+
+.sContent h1 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Search option cards */
+.w {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.sOp {
+    background: var(--bg);
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    width: 220px;
+    min-height: 200px;
+    text-align: center;
+    transition: box-shadow 0.15s;
+}
+
+.sOp:hover { box-shadow: var(--card-shadow); }
+
+.sOp h3 { font-size: 0.95rem; }
+
+/* ─── Project Grid ───────────────────────────────────────────────────────── */
+
+/* Section label badge */
+.section-label {
+    display: inline-block;
+    background-color: rgba(67,97,238,0.1);
+    color: var(--blue);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1.2rem;
+}
+
+/* Grid wrapper */
+.PRO {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Individual project card (image + overlay title) */
+.archivo {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #111;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.archivo:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+}
+
+/* Media inside card fills the card */
+.archivo img,
+.archivo video,
+.archivo iframe,
+.archivo audio,
+.archivo pre {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Title overlay at the bottom of each card */
+.descripcion {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 1.5rem 0.8rem 0.7rem;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Delete-from-favorites button on card */
+.elimF {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.archivo:hover .elimF { opacity: 1; }
+
+/* ─── Single Project View ────────────────────────────────────────────────── */
+.project {
+    background: var(--white);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.project img,
+.project iframe,
+.project video,
+.project audio {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* ─── File Preview (new project upload) ──────────────────────────────────── */
+#preview {
+    margin-top: 0.8rem;
+    padding: 1rem;
+    border: 1.5px dashed #d1d5db;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--bg);
+}
+
+#preview > * { margin: 4px 0; }
+
+/* ─── Page-level utility layout ──────────────────────────────────────────── */
+/* Top-right action row (create project button, etc.) */
+.page-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    font-size: 0.82rem;
+    padding: 2.5rem 2rem 1.2rem;
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer a {
+    color: var(--footer-text);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.4rem;
+    transition: color 0.15s;
+}
+
+.footer a:hover { color: var(--white); }
+
+.footer-brand p {
+    margin-top: 0.5rem;
+    max-width: 220px;
+    line-height: 1.5;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-display);
+}
+
+.footer-bottom {
+    width: 100%;
+    border-top: 1px solid #2d2d44;
+    padding-top: 1rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #6b7280;
+}
+
+/* ─── Welcome / Index Page ───────────────────────────────────────────────── */
+.welcome-hero {
+    padding: calc(var(--header-h) + 3rem) 2rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.welcome-hero h2 {
+    font-size: 2.4rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.welcome-hero p { color: var(--gray-text); max-width: 520px; }
+
+.welcome-images {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.welcome-images img {
+    width: 200px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .header { padding: 0 1rem; }
+    .father { padding: calc(var(--header-h) + 1rem) 1rem 2rem; }
+    .PRO { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .sOp { width: 100%; }
+    .footer { flex-direction: column; gap: 1.5rem; }
+    .welcome-hero h2 { font-size: 1.8rem; }
+}
